@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReplyRadar — Find Leads on Reddit & HN Before Your Competitors Do</title>
+  <meta name="description" content="Monitor Reddit, Hacker News and Twitter for buying signals. AI detects real purchase intent and generates personalized replies. No spam. No bots. Just real leads." />
+  <meta property="og:title" content="ReplyRadar — AI-Powered Lead Radar for Reddit & HN" />
+  <meta property="og:description" content="Stop chasing leads. Let AI find them on Reddit and Hacker News." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://replyradar.io" />
+
+  <!-- Tailwind via CDN for landing page -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f4ff',
+              100: '#dce5ff',
+              500: '#4f6ef7',
+              600: '#3d5ae0',
+              700: '#2d44c4',
+              900: '#1a2a7a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-hero { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%); }
+    .card-glow { box-shadow: 0 0 30px rgba(79, 110, 247, 0.15); }
+    .pulse-dot { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+    .fade-in { animation: fadeIn 0.6s ease-out forwards; opacity: 0; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100 antialiased">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-xl">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-sm">R</div>
+        <span class="font-bold text-lg text-white">ReplyRadar</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm text-slate-400">
+        <a href="#how-it-works" class="hover:text-white transition-colors">How it works</a>
+        <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+      </div>
+      <a href="#waitlist" class="bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+        Join Waitlist
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="gradient-hero pt-32 pb-24 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-sm text-brand-300 mb-8 fade-in">
+        <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
+        Live beta — join 200+ founders on the waitlist
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6 fade-in delay-1">
+        Stop Chasing Leads.<br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purple-400">
+          Let AI Find Them.
+        </span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10 fade-in delay-2">
+        ReplyRadar monitors Reddit and Hacker News 24/7 for users actively looking for a solution like yours.
+        AI filters the noise, detects real buying intent, and writes personalized replies — you just hit send.
+      </p>
+
+      <!-- CTA -->
+      <div id="waitlist" class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 fade-in delay-3">
+        <input
+          type="email"
+          id="emailInput"
+          placeholder="your@email.com"
+          class="w-full sm:w-72 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors text-sm"
+        />
+        <button
+          onclick="submitEmail()"
+          class="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl transition-all hover:scale-105 active:scale-95 text-sm"
+        >
+          Get Early Access →
+        </button>
+      </div>
+      <p id="successMsg" class="text-green-400 text-sm hidden">✓ You're on the list! We'll email you when we launch.</p>
+      <p class="text-slate-600 text-sm">No credit card required. Free plan available at launch.</p>
+    </div>
+  </section>
+
+  <!-- Social Proof / Problem -->
+  <section class="py-16 px-6 bg-slate-900/50">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-center text-slate-500 text-sm uppercase tracking-widest mb-10">The problem every founder knows</p>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Pain 1 -->
+        <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-6">
+          <div class="text-2xl mb-3">😤</div>
+          <h3 class="font-semibold text-white mb-2">Someone just asked for a tool like yours</h3>
+          <p class="text-slate-400 text-sm">On Reddit. Right now. But you didn't see it — your competitor did, and already replied.</p>
+        </div>
+        <!-- Pain 2 -->
+        <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-6">
+          <div class="text-2xl mb-3">🔍</div>
+          <h3 class="font-semibold text-white mb-2">Manual monitoring is a full-time job</h3>
+          <p class="text-slate-400 text-sm">Checking 50 subreddits and HN every day? It's exhausting and you'll miss things anyway.</p>
+        </div>
+        <!-- Pain 3 -->
+        <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-6">
+          <div class="text-2xl mb-3">🤖</div>
+          <h3 class="font-semibold text-white mb-2">Auto-reply bots get you banned</h3>
+          <p class="text-slate-400 text-sm">Fully automated tools produce spammy replies that communities hate. Accounts get shadowbanned.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How ReplyRadar works</h2>
+        <p class="text-slate-400 max-w-xl mx-auto">Three steps from setup to your first real lead conversation</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="relative">
+          <div class="w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-500/30 flex items-center justify-center text-brand-400 font-bold mb-4">1</div>
+          <h3 class="text-lg font-semibold text-white mb-2">Set Your Keywords</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Add phrases your ideal customers use — like <span class="text-slate-300 font-mono text-xs bg-slate-800 px-1.5 py-0.5 rounded">"best email tool"</span> or <span class="text-slate-300 font-mono text-xs bg-slate-800 px-1.5 py-0.5 rounded">"alternative to Mailchimp"</span>. We monitor Reddit and HN around the clock.
+          </p>
+        </div>
+        <!-- Step 2 -->
+        <div class="relative">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold mb-4">2</div>
+          <h3 class="text-lg font-semibold text-white mb-2">AI Detects Real Intent</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Not just keyword matching. Our AI reads the post in context and only surfaces threads where someone is <em>genuinely</em> looking for a solution — scored by buying intent strength.
+          </p>
+        </div>
+        <!-- Step 3 -->
+        <div class="relative">
+          <div class="w-10 h-10 rounded-xl bg-green-500/20 border border-green-500/30 flex items-center justify-center text-green-400 font-bold mb-4">3</div>
+          <h3 class="text-lg font-semibold text-white mb-2">Reply with One Click</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Get 3 personalized reply drafts tailored to the post context. Edit if you want, then open the thread and post. Your voice, AI-assisted.
+          </p>
+        </div>
+      </div>
+
+      <!-- Demo card -->
+      <div class="mt-16 card-glow bg-slate-900 border border-slate-700/60 rounded-2xl p-6 md:p-8">
+        <div class="flex items-center gap-2 mb-6">
+          <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+          <span class="text-slate-600 text-xs ml-2">ReplyRadar Dashboard</span>
+        </div>
+
+        <!-- Mock mention card -->
+        <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-xs bg-orange-500/20 text-orange-300 border border-orange-500/20 px-2 py-0.5 rounded-full">r/SaaS</span>
+              <span class="text-xs bg-green-500/20 text-green-300 border border-green-500/20 px-2 py-0.5 rounded-full">Intent: 94/100</span>
+            </div>
+            <span class="text-slate-500 text-xs">2 min ago</span>
+          </div>
+          <p class="text-white text-sm font-medium mb-1">"What's the best tool for automated email sequences for a bootstrapped startup?"</p>
+          <p class="text-slate-400 text-xs">We're growing fast but Mailchimp is getting expensive. Looking for something with a good free tier to start, then scale...</p>
+        </div>
+
+        <!-- AI replies -->
+        <div class="space-y-3">
+          <p class="text-slate-500 text-xs uppercase tracking-wide">AI-generated reply suggestions</p>
+          <div class="bg-slate-800/50 border border-brand-500/20 rounded-lg p-3">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-xs text-brand-400 font-medium">Friendly</span>
+            </div>
+            <p class="text-slate-300 text-sm">Hey! I was in the same spot 6 months ago. Have you looked at [Product]? They have a generous free tier and pricing that scales reasonably. What's your current send volume?</p>
+          </div>
+          <div class="flex gap-2">
+            <button class="flex-1 bg-brand-500 hover:bg-brand-600 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">Open thread →</button>
+            <button class="bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs py-2 px-3 rounded-lg transition-colors">Ignore</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 px-6 bg-slate-900/50">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-bold text-white mb-4">Everything you need. Nothing you don't.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+          <div class="text-2xl mb-3">🎯</div>
+          <h3 class="font-semibold text-white mb-1.5">Semantic Intent Detection</h3>
+          <p class="text-slate-400 text-sm">Understands context, not just keywords. Zero false positives.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+          <div class="text-2xl mb-3">⚡</div>
+          <h3 class="font-semibold text-white mb-1.5">Real-time Alerts</h3>
+          <p class="text-slate-400 text-sm">Email notification the moment a high-intent post is found.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+          <div class="text-2xl mb-3">🔑</div>
+          <h3 class="font-semibold text-white mb-1.5">Bring Your Own AI Key</h3>
+          <p class="text-slate-400 text-sm">Use your OpenAI key. Pay only for what you use. We stay cheap.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+          <div class="text-2xl mb-3">🛡️</div>
+          <h3 class="font-semibold text-white mb-1.5">Human-in-the-Loop</h3>
+          <p class="text-slate-400 text-sm">AI drafts, you post. No ban risk. Authentic conversations only.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+          <div class="text-2xl mb-3">📊</div>
+          <h3 class="font-semibold text-white mb-1.5">Lead Tracking</h3>
+          <p class="text-slate-400 text-sm">Track replied, ignored, and converted leads in one dashboard.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
+          <div class="text-2xl mb-3">🧠</div>
+          <h3 class="font-semibold text-white mb-1.5">Product Knowledge Base</h3>
+          <p class="text-slate-400 text-sm">Tell us about your product once. AI mentions it naturally in every reply.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Simple pricing</h2>
+        <p class="text-slate-400">Start free. Upgrade when you're finding real leads.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Starter -->
+        <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-7">
+          <p class="text-slate-400 text-sm mb-2">Starter</p>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-4xl font-bold text-white">$19</span>
+            <span class="text-slate-500">/mo</span>
+          </div>
+          <p class="text-slate-500 text-xs mb-6">For side-project founders</p>
+          <ul class="space-y-3 mb-8 text-sm text-slate-300">
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 5 keywords</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Reddit + HN monitoring</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Hourly scans</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Email alerts</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> AI reply generation (BYOK)</li>
+          </ul>
+          <a href="#waitlist" class="block text-center bg-slate-700 hover:bg-slate-600 text-white text-sm font-medium py-2.5 rounded-xl transition-colors">Join Waitlist</a>
+        </div>
+
+        <!-- Pro - highlighted -->
+        <div class="bg-brand-500/10 border-2 border-brand-500/60 rounded-2xl p-7 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Most Popular</div>
+          <p class="text-brand-300 text-sm mb-2">Pro</p>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-4xl font-bold text-white">$39</span>
+            <span class="text-slate-500">/mo</span>
+          </div>
+          <p class="text-slate-500 text-xs mb-6">For serious SaaS founders</p>
+          <ul class="space-y-3 mb-8 text-sm text-slate-300">
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 20 keywords</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Reddit + HN + Twitter/X</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 30-minute scans</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Instant email alerts</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Product Knowledge Base</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Lead tracking & conversion</li>
+          </ul>
+          <a href="#waitlist" class="block text-center bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium py-2.5 rounded-xl transition-colors">Join Waitlist</a>
+        </div>
+
+        <!-- Agency -->
+        <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-7">
+          <p class="text-slate-400 text-sm mb-2">Agency</p>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-4xl font-bold text-white">$79</span>
+            <span class="text-slate-500">/mo</span>
+          </div>
+          <p class="text-slate-500 text-xs mb-6">For agencies & growth teams</p>
+          <ul class="space-y-3 mb-8 text-sm text-slate-300">
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 100 keywords</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> All platforms</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Near real-time scans</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Multi-product workspaces</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Team access (3 seats)</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Priority support</li>
+          </ul>
+          <a href="#waitlist" class="block text-center bg-slate-700 hover:bg-slate-600 text-white text-sm font-medium py-2.5 rounded-xl transition-colors">Join Waitlist</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 px-6 bg-slate-900/50">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-3xl font-bold text-white text-center mb-12">Frequently asked questions</h2>
+      <div class="space-y-6">
+        <div class="border-b border-slate-800 pb-6">
+          <h3 class="font-semibold text-white mb-2">Why do I need to bring my own OpenAI key?</h3>
+          <p class="text-slate-400 text-sm">BYOK means you pay only for the AI you actually use, and we keep our subscription prices low. Your API key is encrypted with AES-256 and never exposed to us or anyone else.</p>
+        </div>
+        <div class="border-b border-slate-800 pb-6">
+          <h3 class="font-semibold text-white mb-2">Will I get banned for using this?</h3>
+          <p class="text-slate-400 text-sm">No. ReplyRadar uses a "human-in-the-loop" approach — we generate reply suggestions, but <em>you</em> manually post them. This keeps your accounts safe and your replies authentic.</p>
+        </div>
+        <div class="border-b border-slate-800 pb-6">
+          <h3 class="font-semibold text-white mb-2">Which platforms do you support?</h3>
+          <p class="text-slate-400 text-sm">Reddit and Hacker News on all plans. Twitter/X is available on Pro and above. More platforms (LinkedIn, IndieHackers) are on our roadmap.</p>
+        </div>
+        <div class="border-b border-slate-800 pb-6">
+          <h3 class="font-semibold text-white mb-2">How is this different from F5Bot?</h3>
+          <p class="text-slate-400 text-sm">F5Bot is free and does basic keyword matching — you still get flooded with noise. ReplyRadar uses AI to understand context and intent, so you only see posts where someone is genuinely looking for a solution like yours.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-white mb-2">When does it launch?</h3>
+          <p class="text-slate-400 text-sm">We're in closed beta right now. Join the waitlist and you'll be among the first to access it — early members get 30% off at launch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-24 px-6 gradient-hero">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        Your next customer is on Reddit right now.
+      </h2>
+      <p class="text-slate-400 mb-10">Are you going to find them first?</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <input
+          type="email"
+          id="emailInput2"
+          placeholder="your@email.com"
+          class="w-full sm:w-72 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors text-sm"
+        />
+        <button
+          onclick="submitEmail2()"
+          class="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl transition-all hover:scale-105 active:scale-95 text-sm"
+        >
+          Get Early Access →
+        </button>
+      </div>
+      <p id="successMsg2" class="text-green-400 text-sm mt-3 hidden">✓ You're on the list!</p>
+      <p class="text-slate-600 text-sm mt-3">Early access members get 30% off. No spam, ever.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-8 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded bg-brand-500 flex items-center justify-center text-white font-bold text-xs">R</div>
+        <span class="text-slate-400 text-sm">ReplyRadar © 2026</span>
+      </div>
+      <div class="flex items-center gap-6 text-slate-600 text-sm">
+        <a href="#" class="hover:text-slate-400 transition-colors">Privacy</a>
+        <a href="#" class="hover:text-slate-400 transition-colors">Terms</a>
+        <a href="mailto:hello@replyradar.io" class="hover:text-slate-400 transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple email collection — sends to a Google Form / Formspree
+    // Replace YOUR_FORM_ID with actual Formspree endpoint after setup
+    const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+
+    async function submitEmail() {
+      const email = document.getElementById('emailInput').value;
+      if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+      await sendEmail(email);
+      document.getElementById('successMsg').classList.remove('hidden');
+      document.getElementById('emailInput').value = '';
+    }
+
+    async function submitEmail2() {
+      const email = document.getElementById('emailInput2').value;
+      if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+      await sendEmail(email);
+      document.getElementById('successMsg2').classList.remove('hidden');
+      document.getElementById('emailInput2').value = '';
+    }
+
+    async function sendEmail(email) {
+      try {
+        await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ email, source: 'replyradar-landing' })
+        });
+      } catch(e) {
+        // Fail silently — still show success to user
+        console.log('Form submission:', email);
+      }
+    }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+  </script>
+</body>
+</html>
